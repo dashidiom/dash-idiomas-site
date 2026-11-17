@@ -1,0 +1,6 @@
+# Copie para .dev.vars para rodar localmente (valores fictícios; nunca coloque chaves reais aqui no repositório)
+ASAAS_BASE_URL=http://127.0.0.1:9911
+ASAAS_API_KEY=chave-sandbox-ficticia
+ASAAS_WEBHOOK_TOKEN=token-webhook-ficticio-0123456789abcdef0123456789
+SHEETS_WEBAPP_URL=http://127.0.0.1:9911/sheets
+SHEETS_SECRET=segredo-planilha-ficticio

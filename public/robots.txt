@@ -1,0 +1,6 @@
+# Matrícula e pagamento não são bloqueados aqui de propósito: eles enviam "noindex"
+# (cabeçalho X-Robots-Tag e meta robots), que só funciona se o buscador puder ler a página.
+User-agent: *
+Disallow: /api/
+
+Sitemap: https://DOMINIO/sitemap.xml

@@ -1,0 +1,23 @@
+{
+  "name": "dash-idiomas-site",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "wrangler dev",
+    "db:migrate:local": "wrangler d1 migrations apply dash-idiomas --local",
+    "db:migrate:remote": "wrangler d1 migrations apply dash-idiomas --remote",
+    "typecheck": "tsc -p .",
+    "test": "node tests/run.mjs",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261117.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.164.0"
+  },
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Matrícula | Dash Idiomas</title>
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Fraunces:opsz,wght@9..144,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/img/logo-dash.png" alt="" width="52" height="55"><span>Dash Idiomas</span></a>
+    </div>
+  </header>
+
+  <main class="page-narrow">
+    <span class="eyebrow">Matrícula · passo 1 de 2</span>
+    <h1 style="font-size:clamp(2rem,5vw,2.8rem)">Bora começar!</h1>
+    <p class="lead">Conte um pouco sobre você. No próximo passo, você confere o plano e ativa a assinatura no cartão.</p>
+
+    <form class="card" id="form-matricula" novalidate>
+      <div class="form-alert error" role="alert" id="alert"></div>
+
+      <fieldset class="field" data-field="plano">
+        <legend>Plano</legend>
+        <div class="options cols-3">
+          <label class="option"><input type="radio" name="plano" value="1x" required><span><strong>1x por semana</strong><small>R$ 390/mês</small></span></label>
+          <label class="option"><input type="radio" name="plano" value="2x"><span><strong>2x por semana</strong><small>R$ 780/mês</small></span></label>
+          <label class="option"><input type="radio" name="plano" value="3x"><span><strong>3x por semana</strong><small>R$ 1.170/mês</small></span></label>
+        </div>
+        <p class="error"></p>
+      </fieldset>
+
+      <fieldset class="field" data-field="objetivo">
+        <legend>Seu objetivo com o inglês</legend>
+        <div class="options cols-2">
+          <label class="option"><input type="radio" name="objetivo" value="dia-a-dia" required><span><strong>Dia a dia</strong><small>Conversação e confiança</small></span></label>
+          <label class="option"><input type="radio" name="objetivo" value="viagens"><span><strong>Viagens</strong><small>Se virar em qualquer lugar</small></span></label>
+          <label class="option"><input type="radio" name="objetivo" value="negocios"><span><strong>Negócios</strong><small>Reuniões, e-mails, carreira</small></span></label>
+          <label class="option"><input type="radio" name="objetivo" value="provas"><span><strong>Provas de proficiência</strong><small>Preparação para exames</small></span></label>
+        </div>
+        <p class="error"></p>
+      </fieldset>
+
+      <div class="field" data-field="nome">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" data-field="email">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" inputmode="email" maxlength="160" required>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" data-field="whatsapp">
+        <label for="whatsapp">WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" inputmode="tel" placeholder="(11) 91234-5678" maxlength="20" required>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" data-field="nivel">
+        <label for="nivel">Seu nível de inglês hoje</label>
+        <select id="nivel" name="nivel" required>
+          <option value="">Selecione</option>
+          <option value="nunca-estudei">Nunca estudei</option>
+          <option value="basico">Básico</option>
+          <option value="intermediario">Intermediário</option>
+          <option value="avancado">Avançado</option>
+          <option value="nao-sei">Não sei dizer</option>
+        </select>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" data-field="disponibilidade">
+        <label for="disponibilidade">Dias e horários que funcionam para você</label>
+        <p class="hint">Exemplo: terças e quintas depois das 19h.</p>
+        <input type="text" id="disponibilidade" name="disponibilidade" maxlength="300" required>
+        <p class="error"></p>
+      </div>
+
+      <div class="field" data-field="observacoes">
+        <label for="observacoes">Algo mais que a gente deva saber? <span style="font-weight:400;color:var(--muted)">(opcional)</span></label>
+        <textarea id="observacoes" name="observacoes" maxlength="500"></textarea>
+        <p class="error"></p>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label>Não preencha <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="field" data-field="aceite">
+        <label class="check" style="font-weight:400">
+          <input type="checkbox" name="aceite" value="true" required>
+          <span>Li e aceito os <a href="/termos/" target="_blank">termos de contratação</a> e a <a href="/privacidade/" target="_blank">política de privacidade</a>.</span>
+        </label>
+        <p class="error"></p>
+      </div>
+
+      <button class="btn btn-primary btn-block" type="submit" id="enviar">Continuar para o pagamento</button>
+      <p class="secure-note">Seus dados são usados só para a sua matrícula e o contato da equipe Dash.</p>
+    </form>
+  </main>
+
+  <script src="/js/matricula.js" defer></script>
+</body>
+</html>

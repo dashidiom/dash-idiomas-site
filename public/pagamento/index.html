@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>Pagamento | Dash Idiomas</title>
+  <link rel="icon" href="/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Fraunces:opsz,wght@9..144,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/"><img src="/img/logo-dash.png" alt="" width="52" height="55"><span>Dash Idiomas</span></a>
+    </div>
+  </header>
+
+  <main class="page-narrow">
+    <span class="eyebrow">Matrícula · passo 2 de 2</span>
+    <h1 style="font-size:clamp(2rem,5vw,2.8rem)" id="titulo">Confira sua assinatura</h1>
+
+    <div class="form-alert info" id="aviso" role="status"></div>
+    <div class="form-alert error" id="erro" role="alert"></div>
+
+    <section class="card" id="resumo" hidden>
+      <ul class="summary">
+        <li><span>Plano</span><span id="r-plano"></span></li>
+        <li><span>Foco</span><span id="r-objetivo"></span></li>
+        <li><span>Valor</span><span id="r-valor"></span></li>
+        <li><span>Periodicidade</span><span id="r-periodicidade"></span></li>
+        <li><span>Primeira cobrança</span><span id="r-primeira"></span></li>
+      </ul>
+
+      <div class="conditions">
+        <strong>Como funciona a assinatura</strong>
+        <ul>
+          <li>A mensalidade é cobrada automaticamente no cartão de crédito, todo mês, no mesmo dia da primeira cobrança.</li>
+          <li>É uma assinatura, não um parcelamento: só o valor do mês é cobrado, sem ocupar o limite do cartão com o curso inteiro.</li>
+          <li>Você pode pedir o cancelamento a qualquer momento pelos canais da Dash. O cancelamento interrompe as cobranças seguintes; a mensalidade já paga vale para as aulas do mês em curso.</li>
+          <li>Detalhes nos <a href="/termos/" target="_blank">termos de contratação</a>.</li>
+        </ul>
+      </div>
+
+      <label class="check" style="margin-bottom:20px">
+        <input type="checkbox" id="confirmo">
+        <span>Autorizo a cobrança mensal recorrente no meu cartão de crédito nas condições acima.</span>
+      </label>
+
+      <button class="btn btn-primary btn-block" id="pagar" disabled>Ir para o pagamento seguro</button>
+      <p class="secure-note">🔒 Você vai digitar o cartão na página segura do Asaas, nosso parceiro de pagamentos. A Dash não recebe nem guarda os dados do seu cartão.</p>
+    </section>
+
+    <p class="skeleton" id="carregando">Carregando sua matrícula…</p>
+  </main>
+
+  <script src="/js/pagamento.js" defer></script>
+</body>
+</html>
