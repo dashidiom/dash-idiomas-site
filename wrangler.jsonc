@@ -9,7 +9,7 @@
     "run_worker_first": ["/api/*", "/matricula/*", "/pagamento/*"]
   },
   "d1_databases": [
-    { "binding": "DB", "database_name": "dash-idiomas", "database_id": "PREENCHER_APOS_CRIAR_O_BANCO", "migrations_dir": "migrations" }
+    { "binding": "DB", "database_name": "dash-idiomas", "database_id": "bc71f3b7-663d-4158-8f7d-140c44e83660", "migrations_dir": "migrations" }
   ],
   "vars": {
     "SITE_URL": "https://dashidiomas.com.br",
