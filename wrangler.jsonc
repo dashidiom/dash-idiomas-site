@@ -12,7 +12,7 @@
     { "binding": "DB", "database_name": "dash-idiomas", "database_id": "PREENCHER_APOS_CRIAR_O_BANCO", "migrations_dir": "migrations" }
   ],
   "vars": {
-    "SITE_URL": "http://localhost:8787",
+    "SITE_URL": "https://dashidiomas.com.br",
     "ASAAS_BASE_URL": "https://api-sandbox.asaas.com",
     "TOKEN_TTL_HOURS": "168"
   }

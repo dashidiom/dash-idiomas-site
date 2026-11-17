@@ -4,3 +4,4 @@ ASAAS_API_KEY=chave-sandbox-ficticia
 ASAAS_WEBHOOK_TOKEN=token-webhook-ficticio-0123456789abcdef0123456789
 SHEETS_WEBAPP_URL=http://127.0.0.1:9911/sheets
 SHEETS_SECRET=segredo-planilha-ficticio
+SITE_URL=http://127.0.0.1:8787
