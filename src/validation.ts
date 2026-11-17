@@ -9,6 +9,8 @@ export interface EnrollmentInput {
   nivel: string;
   disponibilidade: string;
   observacoes: string;
+  autorizaImagem: boolean;
+  autorizaMarketing: boolean;
 }
 
 export type ValidationResult =
@@ -32,7 +34,8 @@ export function validateEnrollment(raw: Record<string, unknown>): ValidationResu
   const nivel = str(raw.nivel);
   const disponibilidade = str(raw.disponibilidade);
   const observacoes = typeof raw.observacoes === "string" ? raw.observacoes.trim() : "";
-  const aceite = raw.aceite === true || raw.aceite === "true" || raw.aceite === "on";
+  const truthy = (v: unknown) => v === true || v === "true" || v === "on";
+  const aceite = truthy(raw.aceite);
 
   if (nome.length < 3 || nome.length > 120 || !nome.includes(" ")) errors.nome = "Informe seu nome completo.";
   if (!EMAIL_RE.test(email) || email.length > 160) errors.email = "Informe um e-mail válido.";
@@ -47,5 +50,6 @@ export function validateEnrollment(raw: Record<string, unknown>): ValidationResu
   if (!aceite) errors.aceite = "É preciso aceitar os termos e a política de privacidade.";
 
   if (Object.keys(errors).length) return { ok: false, errors };
-  return { ok: true, data: { nome, email, whatsapp: phone, objetivo, plano, nivel, disponibilidade, observacoes } };
+  return { ok: true, data: { nome, email, whatsapp: phone, objetivo, plano, nivel, disponibilidade, observacoes,
+    autorizaImagem: truthy(raw.autoriza_imagem), autorizaMarketing: truthy(raw.autoriza_marketing) } };
 }

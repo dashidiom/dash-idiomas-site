@@ -75,7 +75,7 @@ test("campo-armadilha bloqueia robôs", async () => {
 });
 
 test("matrícula registra data e status e grava na planilha", async () => {
-  const { res, data } = await post("/api/matricula", aluno({ nome: "Planilha Teste Silva" }));
+  const { res, data } = await post("/api/matricula", aluno({ nome: "Planilha Teste Silva", autoriza_imagem: true }));
   assert.equal(res.status, 201);
   const t = tokenFrom(data.pagamentoUrl);
   const resumo = await (await fetch(`${BASE}/api/pagamento?t=${t}`)).json();
@@ -90,6 +90,8 @@ test("matrícula registra data e status e grava na planilha", async () => {
   assert.ok(row, "linha na planilha");
   assert.equal(row.status_pagamento, "Pagamento pendente");
   assert.ok(row.criado_em);
+  assert.equal(row.autoriza_imagem, "Sim");
+  assert.equal(row.autoriza_marketing, "Não");
 });
 
 test("link com token inválido é recusado", async () => {

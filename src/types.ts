@@ -33,4 +33,6 @@ export interface Enrollment {
   subscription_id: string | null;
   last_payment_at: string | null;
   last_event: string | null;
+  autoriza_imagem: number;
+  autoriza_marketing: number;
 }

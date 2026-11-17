@@ -27,6 +27,8 @@ const HEADERS = [
   ["nivel", "Nível"],
   ["disponibilidade", "Disponibilidade"],
   ["observacoes", "Observações"],
+  ["autoriza_imagem", "Autoriza imagem e voz"],
+  ["autoriza_marketing", "Autoriza marketing"],
   ["status_matricula", "Status da matrícula"],
   ["status_pagamento", "Status do pagamento"],
   ["assinatura_asaas", "Assinatura no Asaas"],

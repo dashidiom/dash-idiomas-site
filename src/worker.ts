@@ -66,11 +66,12 @@ async function createEnrollment(req: Request, env: Env, ctx: ExecutionContext): 
 
   await env.DB.prepare(
     `INSERT INTO enrollments (id, created_at, updated_at, nome, email, whatsapp, objetivo, plano, valor_centavos, nivel,
-       disponibilidade, observacoes, consent_at, token_hash, token_expires_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       disponibilidade, observacoes, consent_at, token_hash, token_expires_at, autoriza_imagem, autoriza_marketing)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(id, now, now, d.nome, d.email, d.whatsapp, d.objetivo, d.plano, PLANS[d.plano].valorCentavos, d.nivel,
-      d.disponibilidade, d.observacoes, now, await sha256Hex(token), expires)
+      d.disponibilidade, d.observacoes, now, await sha256Hex(token), expires,
+      d.autorizaImagem ? 1 : 0, d.autorizaMarketing ? 1 : 0)
     .run();
 
   const e = await env.DB.prepare("SELECT * FROM enrollments WHERE id = ?").bind(id).first<Enrollment>();

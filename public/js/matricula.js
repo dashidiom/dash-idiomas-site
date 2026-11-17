@@ -46,6 +46,8 @@
     clearErrors();
     const data = Object.fromEntries(new FormData(form).entries());
     data.aceite = form.querySelector('input[name="aceite"]').checked;
+    data.autoriza_imagem = form.querySelector('input[name="autoriza_imagem"]').checked;
+    data.autoriza_marketing = form.querySelector('input[name="autoriza_marketing"]').checked;
     submit.disabled = true;
     submit.textContent = "Enviando…";
     try {

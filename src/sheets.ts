@@ -22,6 +22,8 @@ export async function syncToSheet(env: Env, e: Enrollment): Promise<void> {
     nivel: NIVEIS[e.nivel] ?? e.nivel,
     disponibilidade: e.disponibilidade,
     observacoes: e.observacoes,
+    autoriza_imagem: e.autoriza_imagem ? "Sim" : "Não",
+    autoriza_marketing: e.autoriza_marketing ? "Sim" : "Não",
     status_matricula: e.enrollment_status,
     status_pagamento: PAYMENT_STATUS_LABEL[e.payment_status] ?? e.payment_status,
     assinatura_asaas: e.subscription_id ?? "",
