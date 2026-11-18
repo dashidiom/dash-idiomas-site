@@ -17,6 +17,7 @@ export interface Enrollment {
   nome: string;
   email: string;
   whatsapp: string;
+  data_nascimento: string | null;
   objetivo: string;
   plano: string;
   valor_centavos: number;

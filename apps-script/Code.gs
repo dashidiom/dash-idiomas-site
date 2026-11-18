@@ -42,6 +42,8 @@ const HEADERS = [
   ["status_pagamento", "Status do pagamento"],
   ["assinatura_asaas", "Assinatura no Asaas"],
   ["ultimo_pagamento", "Último pagamento"],
+  // Colunas novas entram sempre no fim, para não desalinhar as linhas antigas.
+  ["data_nascimento", "Data de nascimento"],
 ];
 
 function doPost(e) {
@@ -96,7 +98,7 @@ function avisarEquipe(row, nova, statusAnterior) {
     const digitos = String(row.whatsapp || "").replace(/\D/g, "");
     const whats = digitos ? "https://wa.me/55" + digitos : "";
     const linhas = [
-      ["Aluno", row.nome], ["WhatsApp", row.whatsapp], ["E-mail", row.email],
+      ["Aluno", row.nome], ["Nascimento", row.data_nascimento], ["WhatsApp", row.whatsapp], ["E-mail", row.email],
       ["Plano", row.plano + " (" + row.valor_mensal + "/mês)"], ["Objetivo", row.objetivo],
       ["Nível", row.nivel], ["Disponibilidade", row.disponibilidade], ["Observações", row.observacoes],
       ["Status do pagamento", status],
@@ -143,10 +145,10 @@ function getSheet() {
   const ss = PLANILHA_ID ? SpreadsheetApp.openById(PLANILHA_ID) : SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(HEADERS.map(([, label]) => label));
+  if (sheet.getLastRow() === 0 || sheet.getLastColumn() < HEADERS.length) {
+    // Cria o cabeçalho, ou completa com colunas novas acrescentadas depois.
+    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS.map(([, label]) => label)]).setFontWeight("bold");
     sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
   }
   return sheet;
 }

@@ -1,5 +1,7 @@
 import { NIVEIS, OBJETIVOS, PAYMENT_STATUS_LABEL, PLANS, formatBRL } from "./config";
 import type { Enrollment, Env } from "./types";
+import { formatDateBR, todaySaoPaulo } from "./util";
+import { ageOn } from "./validation";
 
 /**
  * Envia (cria ou atualiza) a linha da matrícula na planilha da equipe,
@@ -7,6 +9,11 @@ import type { Enrollment, Env } from "./types";
  * Falhas não interrompem o fluxo do aluno: o banco D1 é a fonte de verdade
  * e cada mudança de status reenvia a linha completa.
  */
+function birthLabel(birth: string): string {
+  const idade = ageOn(birth, todaySaoPaulo());
+  return `${formatDateBR(birth)} (${idade} anos${idade < 18 ? ", menor de idade" : ""})`;
+}
+
 export async function syncToSheet(env: Env, e: Enrollment): Promise<void> {
   if (!env.SHEETS_WEBAPP_URL || !env.SHEETS_SECRET) return;
   const row = {
@@ -28,6 +35,7 @@ export async function syncToSheet(env: Env, e: Enrollment): Promise<void> {
     status_pagamento: PAYMENT_STATUS_LABEL[e.payment_status] ?? e.payment_status,
     assinatura_asaas: e.subscription_id ?? "",
     ultimo_pagamento: e.last_payment_at ?? "",
+    data_nascimento: e.data_nascimento ? birthLabel(e.data_nascimento) : "",
   };
   try {
     const res = await fetch(env.SHEETS_WEBAPP_URL, {

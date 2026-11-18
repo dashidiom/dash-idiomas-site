@@ -65,11 +65,11 @@ async function createEnrollment(req: Request, env: Env, ctx: ExecutionContext): 
   const expires = new Date(Date.now() + ttlHours * 3600_000).toISOString();
 
   await env.DB.prepare(
-    `INSERT INTO enrollments (id, created_at, updated_at, nome, email, whatsapp, objetivo, plano, valor_centavos, nivel,
+    `INSERT INTO enrollments (id, created_at, updated_at, nome, email, whatsapp, data_nascimento, objetivo, plano, valor_centavos, nivel,
        disponibilidade, observacoes, consent_at, token_hash, token_expires_at, autoriza_imagem, autoriza_marketing)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
-    .bind(id, now, now, d.nome, d.email, d.whatsapp, d.objetivo, d.plano, PLANS[d.plano].valorCentavos, d.nivel,
+    .bind(id, now, now, d.nome, d.email, d.whatsapp, d.dataNascimento, d.objetivo, d.plano, PLANS[d.plano].valorCentavos, d.nivel,
       d.disponibilidade, d.observacoes, now, await sha256Hex(token), expires,
       d.autorizaImagem ? 1 : 0, d.autorizaMarketing ? 1 : 0)
     .run();

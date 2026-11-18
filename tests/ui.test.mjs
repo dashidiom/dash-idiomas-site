@@ -39,6 +39,7 @@ test("celular: escolher plano, matricular, revisar assinatura, pagar e ver statu
 
     await page.check('input[name="objetivo"][value="negocios"]', { force: true });
     await page.fill("#nome", "João Fictício Souza");
+    await page.fill("#data_nascimento", "1988-03-15");
     await page.fill("#email", "joao.ficticio@exemplo.com");
     await page.fill("#whatsapp", "21998765432");
     assert.equal(await page.inputValue("#whatsapp"), "(21) 99876-5432");

@@ -11,6 +11,7 @@ const aluno = (over = {}) => ({
   nome: "Maria Teste da Silva",
   email: `maria+${Math.random().toString(36).slice(2)}@exemplo.com`,
   whatsapp: "(11) 91234-5678",
+  data_nascimento: "1990-05-20",
   objetivo: "viagens",
   plano: "2x",
   nivel: "basico",
@@ -67,6 +68,11 @@ test("validação no servidor recusa dados inválidos com mensagens por campo", 
   const { res, data } = await post("/api/matricula", aluno({ nome: "Ma", email: "x@", whatsapp: "123", plano: "9x", aceite: false }));
   assert.equal(res.status, 422);
   for (const f of ["nome", "email", "whatsapp", "plano", "aceite"]) assert.ok(data.fields[f], f);
+  for (const dn of ["", "31/02/1990", "2030-01-01", "abc"]) {
+    const r = await post("/api/matricula", aluno({ data_nascimento: dn }));
+    assert.equal(r.res.status, 422, dn);
+    assert.ok(r.data.fields.data_nascimento, dn);
+  }
 });
 
 test("campo-armadilha bloqueia robôs", async () => {
@@ -92,6 +98,7 @@ test("matrícula registra data e status e grava na planilha", async () => {
   assert.ok(row.criado_em);
   assert.equal(row.autoriza_imagem, "Sim");
   assert.equal(row.autoriza_marketing, "Não");
+  assert.match(row.data_nascimento, /^20\/05\/1990 \(\d+ anos\)$/);
 });
 
 test("link com token inválido é recusado", async () => {
@@ -183,4 +190,13 @@ test("evento sem matrícula vinculada é aceito sem erro (para não travar a fil
   const { res, data } = await webhook({ id: evId(), event: "PAYMENT_RECEIVED", payment: { id: "pay_x", subscription: "sub_desconhecida" } });
   assert.equal(res.status, 200);
   assert.equal(data.vinculado, false);
+});
+
+test("data de nascimento aceita DD/MM/AAAA e marca menor de idade na planilha", async () => {
+  const ano = new Date().getFullYear() - 15;
+  const { res } = await post("/api/matricula", aluno({ nome: "Menor Teste Souza", data_nascimento: `10/01/${ano}` }));
+  assert.equal(res.status, 201);
+  await sleep(300);
+  const row = Object.values((await mockState()).sheetRows).find((r) => r.nome === "Menor Teste Souza");
+  assert.match(row.data_nascimento, new RegExp(`^10/01/${ano} \\(1[45] anos, menor de idade\\)$`));
 });
