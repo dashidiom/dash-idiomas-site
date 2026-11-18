@@ -3,6 +3,8 @@
   "name": "dash-idiomas-site",
   "main": "src/worker.ts",
   "compatibility_date": "2026-11-01",
+  "workers_dev": true,
+  "preview_urls": false,
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -12,7 +14,7 @@
     { "binding": "DB", "database_name": "dash-idiomas", "database_id": "bc71f3b7-663d-4158-8f7d-140c44e83660", "migrations_dir": "migrations" }
   ],
   "vars": {
-    "SITE_URL": "https://dashidiomas.com.br",
+    "SITE_URL": "https://dash-idiomas-site.dashidiomas.workers.dev",
     "ASAAS_BASE_URL": "https://api-sandbox.asaas.com",
     "TOKEN_TTL_HOURS": "168"
   }
