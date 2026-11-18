@@ -106,6 +106,7 @@ test("checkout é criado como assinatura mensal no cartão com valor do plano", 
   assert.deepEqual(b.chargeTypes, ["RECURRENT"]);
   assert.equal(b.subscription.cycle, "MONTHLY");
   assert.equal(b.items[0].value, 1170);
+  assert.ok(b.items[0].name.length <= 30, "nome do item com até 30 caracteres (limite do Asaas)");
   assert.match(b.callback.successUrl, /\/pagamento\/retorno\/\?t=/);
   assert.ok(b.externalReference);
 });

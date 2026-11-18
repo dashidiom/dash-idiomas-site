@@ -30,8 +30,9 @@ export async function createSubscriptionCheckout(env: Env, e: Enrollment, token:
     },
     items: [
       {
-        name: `Dash Idiomas - ${plan.nome}`,
-        description: plan.descricao,
+        // O Asaas aceita no máximo 30 caracteres no nome do item.
+        name: `Inglês - ${plan.nome}`.slice(0, 30),
+        description: `Dash Idiomas - ${plan.descricao}`,
         quantity: 1,
         value: plan.valorCentavos / 100,
       },
