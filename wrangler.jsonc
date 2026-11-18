@@ -5,6 +5,8 @@
   "compatibility_date": "2026-11-01",
   "workers_dev": true,
   "preview_urls": false,
+  // Logs do Worker (Cloudflare > Workers > dash-idiomas-site > Observability)
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
