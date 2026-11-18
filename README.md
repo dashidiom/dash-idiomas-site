@@ -20,6 +20,8 @@ Aluno volta do Asaas ──> /pagamento/retorno/?t=... mostra o status confirmad
 - **Refazer pagamento após recusa:** o aluno abre o mesmo link de pagamento e paga com outro cartão. A assinatura nova substitui a antiga, que é removida automaticamente no Asaas.
 - **Privacidade:** matrícula e pagamento ficam fora do menu e do sitemap, enviam `noindex` e só mostram dados com o token individual. O cartão é digitado só na página do Asaas.
 
+Acessos, backup e como dar acesso a outra pessoa: veja [`docs/ACESSOS.md`](docs/ACESSOS.md).
+
 ## Estrutura
 
 | Pasta | Conteúdo |
