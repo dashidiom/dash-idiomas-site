@@ -2,16 +2,21 @@
  * Dash Idiomas — recebe as matrículas do site e grava na planilha.
  *
  * Instalação (feita uma vez, pela conta Google da escola):
- * 1. Crie uma planilha "Matrículas Dash Idiomas" e abra Extensões > Apps Script.
- * 2. Cole este arquivo inteiro no editor e salve.
- * 3. Em Configurações do projeto > Propriedades do script, crie SHEETS_SECRET
- *    com um texto aleatório longo (o mesmo valor vai como segredo na Cloudflare).
+ * 1. Crie uma planilha "Matrículas Dash Idiomas" e copie o ID dela (o trecho da URL
+ *    entre /d/ e /edit).
+ * 2. Em script.google.com, crie um projeto, cole este arquivo inteiro e preencha
+ *    PLANILHA_ID abaixo com esse ID. Salve.
+ * 3. Escolha a função "configurar" e clique em Executar. Autorize o acesso à planilha.
+ *    O registro de execução mostra o segredo gerado: ele vai como SHEETS_SECRET na
+ *    Cloudflare (Configurações > Variáveis e segredos). Não compartilhe esse valor.
  * 4. Implantar > Nova implantação > Tipo "App da Web":
  *      Executar como: Eu  |  Quem pode acessar: Qualquer pessoa
  *    Copie a URL gerada: ela vai como segredo SHEETS_WEBAPP_URL na Cloudflare.
  * A planilha continua privada: só quem a escola compartilhar consegue abri-la.
  * O site só consegue gravar linhas, e somente com o segredo correto.
  */
+
+const PLANILHA_ID = "";
 
 const SHEET_NAME = "Matrículas";
 const HEADERS = [
@@ -62,8 +67,21 @@ function doPost(e) {
   }
 }
 
+/** Executar uma vez: cria o cabeçalho, pede a autorização e gera o segredo. */
+function configurar() {
+  getSheet();
+  const props = PropertiesService.getScriptProperties();
+  let secret = props.getProperty("SHEETS_SECRET");
+  if (!secret) {
+    secret = Utilities.getUuid().replace(/-/g, "") + Utilities.getUuid().replace(/-/g, "");
+    props.setProperty("SHEETS_SECRET", secret);
+  }
+  console.log("Planilha pronta. Segredo para a Cloudflare (SHEETS_SECRET): " + secret);
+}
+
 function getSheet() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  // Projeto avulso usa PLANILHA_ID; projeto aberto pela própria planilha usa a planilha ativa.
+  const ss = PLANILHA_ID ? SpreadsheetApp.openById(PLANILHA_ID) : SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
   if (sheet.getLastRow() === 0) {
