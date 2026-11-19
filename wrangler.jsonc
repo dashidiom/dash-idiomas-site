@@ -5,19 +5,24 @@
   "compatibility_date": "2026-11-01",
   "workers_dev": true,
   "preview_urls": false,
+  // Domínio oficial (DNS na Cloudflare). www redireciona para o domínio principal.
+  "routes": [
+    { "pattern": "dashidiomas.com.br", "custom_domain": true },
+    { "pattern": "www.dashidiomas.com.br", "custom_domain": true }
+  ],
   // Logs do Worker (Cloudflare > Workers > dash-idiomas-site > Observability)
   "observability": { "enabled": true, "head_sampling_rate": 1 },
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/*", "/matricula/*", "/pagamento/*"]
+    "run_worker_first": true
   },
   "d1_databases": [
     { "binding": "DB", "database_name": "dash-idiomas", "database_id": "bc71f3b7-663d-4158-8f7d-140c44e83660", "migrations_dir": "migrations" }
   ],
   "vars": {
-    "SITE_URL": "https://dash-idiomas-site.dashidiomas.workers.dev",
-    "ASAAS_BASE_URL": "https://api-sandbox.asaas.com",
+    "SITE_URL": "https://dashidiomas.com.br",
+    "ASAAS_BASE_URL": "https://api.asaas.com",
     "TOKEN_TTL_HOURS": "168"
   }
   // Segredos (configurar no painel da Cloudflare, nunca no código):

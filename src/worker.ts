@@ -117,6 +117,13 @@ export default {
     const url = new URL(req.url);
     const p = url.pathname;
 
+    // www e o endereço provisório (workers.dev) levam ao domínio oficial; a API continua respondendo em qualquer endereço.
+    const oficial = new URL(env.SITE_URL);
+    if (!p.startsWith("/api/") && url.host !== oficial.host &&
+        (url.hostname.endsWith(".dashidiomas.com.br") || url.hostname.endsWith(".workers.dev"))) {
+      return Response.redirect(`${oficial.origin}${p}${url.search}`, 301);
+    }
+
     if (p.startsWith("/api/")) {
       let res: Response;
       if (p === "/api/matricula" && req.method === "POST") res = await createEnrollment(req, env, ctx);
